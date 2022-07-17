@@ -21,6 +21,7 @@ import java.util.Optional;
 public class SchoolServiceImpl implements SchoolService {
     @Autowired
     private SchoolRepository schoolRepository;
+
     @Override
     public void createSchool(School school) {
         school.setActive(true);

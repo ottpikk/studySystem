@@ -10,8 +10,8 @@ import java.util.List;
  *
  * @author Ott Pikk
  */
-
 public interface SchoolService {
+
     /**
      * To create new School
      * @param school School
