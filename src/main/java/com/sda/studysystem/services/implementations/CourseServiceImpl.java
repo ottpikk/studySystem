@@ -1,38 +1,67 @@
 package com.sda.studysystem.services.implementations;
 
+import com.sda.studysystem.exceptions.SchoolNotFoundException;
 import com.sda.studysystem.models.Course;
+import com.sda.studysystem.repositories.CourseRepository;
 import com.sda.studysystem.services.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
+/**
+ * Implementaation of CourseService
+ *
+ * @author Ott Pikk
+ */
+@Service
+@Transactional
 public class CourseServiceImpl implements CourseService {
+
+
+    @Autowired
+    private CourseRepository courseRepository;
     @Override
     public void createCourse(Course course) {
-
+        course.setActive(true);
+        courseRepository.save(course);
     }
 
     @Override
-    public Course findCourseById(Long id) {
-        return null;
+    public Course findCourseById(Long id) throws SchoolNotFoundException {
+        Optional<Course> optionalCourse = courseRepository.findById(id);
+
+        if (optionalCourse.isEmpty()) {
+            throw new SchoolNotFoundException(id);
+        }
+        return optionalCourse.get();
     }
 
     @Override
     public List<Course> findAllCourses() {
-        return null;
+        return courseRepository.findAll();
     }
 
     @Override
-    public void updateCourse(Course course) {
-
+    public void updateCourse(Course course) throws SchoolNotFoundException {
+        if (findCourseById(course.getId()) != null){
+            courseRepository.saveAndFlush(course);
+        }
     }
 
     @Override
-    public void deleteCourseById(Long id) {
-
+    public void deleteCourseById(Long id) throws SchoolNotFoundException {
+        Course course = findCourseById(id);
+        course.setActive(false);
+        courseRepository.saveAndFlush(course);
     }
 
     @Override
-    public void restoreCourseById(Long id) {
-
+    public void restoreCourseById(Long id) throws SchoolNotFoundException {
+        Course course = findCourseById(id);
+        course.setActive(true);
+        courseRepository.saveAndFlush(course);
     }
 }

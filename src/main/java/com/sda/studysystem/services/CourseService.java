@@ -1,5 +1,6 @@
 package com.sda.studysystem.services;
 
+import com.sda.studysystem.exceptions.SchoolNotFoundException;
 import com.sda.studysystem.models.Course;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface CourseService {
      * @param id id of the course
      * @return Course
      */
-    Course findCourseById(Long id);
+    Course findCourseById(Long id) throws SchoolNotFoundException;
 
     /**
      * To find all courses
@@ -34,18 +35,18 @@ public interface CourseService {
      * To update an existing course
      * @param course Course
      */
-    void updateCourse(Course course);
+    void updateCourse(Course course) throws SchoolNotFoundException;
 
     /**
      * To delete course by its ID
      * @param id id of the course
      */
-    void deleteCourseById(Long id);
+    void deleteCourseById(Long id) throws SchoolNotFoundException;
 
     /**
      * To restore a course by its ID
      * @param id id of the course
      */
-    void restoreCourseById(Long id);
+    void restoreCourseById(Long id) throws SchoolNotFoundException;
 
 }
