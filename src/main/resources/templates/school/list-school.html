@@ -68,10 +68,10 @@
                                 <a class ="btn btn-primary" role="button" th:href="@{/school/update/{id}(id=${school.id})}" th:if="${school.isActive()}">
                                     Update
                                 </a>
-                                <a class ="btn btn-danger" role="button" th:if="${school.isActive()}">
+                                <a class ="btn btn-danger" role="button" th:href="@{/school/delete/{id}(id=${school.id})}" th:if="${school.isActive()}">
                                     Delete
                                 </a>
-                                <a class ="btn btn-success" role="button" th:if="${school.isActive()}">
+                                <a class ="btn btn-success" role="button" th:href="@{/school/restore/{id}(id=${school.id})}" th:if="${!school.isActive()}">
                                     Restore
                                 </a>
                             </td>

@@ -31,7 +31,7 @@ public class SchoolController {
                                        @ModelAttribute("messageType") String messageType) {
         return "school/create-school";
     }
-@PostMapping
+    @PostMapping
     public String createSchool(School school, RedirectAttributes redirectAttributes) {
         try {
             School searchSchool = schoolService.findSchoolByName(school.getName());
@@ -49,9 +49,9 @@ public class SchoolController {
     }
 
     /*
-    GET list-school "/school"
-    POST create - school "/school"
-    POST update - school "/school/{id}"
+    GET list-       school "/school"
+    POST create -   school "/school"
+    POST update -   school "/school/{id}"
      */
     @GetMapping("/update/{id}")
     public String showUpdateSchoolPage(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes,
@@ -79,6 +79,36 @@ public class SchoolController {
         } catch (SchoolNotFoundException e) {
             redirectAttributes.addAttribute("message",
                     String.format("School(id=%d) not found", school.getId()));
+            redirectAttributes.addAttribute("messageType", "error");
+            return "redirect:/school";
+        }
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteSchool(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+       try{
+           schoolService.deleteSchoolById(id);
+           redirectAttributes.addAttribute("message",
+                   String.format("School(id=%d) deleted successfully", id));
+           redirectAttributes.addAttribute("messageType", "success");
+           return "redirect:/school";
+       } catch (SchoolNotFoundException e) {
+           redirectAttributes.addAttribute("message",
+                   String.format("School(id=%d) not found", id));
+           redirectAttributes.addAttribute("messageType", "error");
+           return "redirect:/school";
+       }
+    }
+    @GetMapping("/restore/{id}")
+    public String restoreSchool(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try{
+            schoolService.restoreSchoolById(id);
+            redirectAttributes.addAttribute("message",
+                    String.format("School(id=%d) restored successfully", id));
+            redirectAttributes.addAttribute("messageType", "success");
+            return "redirect:/school";
+        } catch (SchoolNotFoundException e) {
+            redirectAttributes.addAttribute("message",
+                    String.format("School(id=%d) not found", id));
             redirectAttributes.addAttribute("messageType", "error");
             return "redirect:/school";
         }
