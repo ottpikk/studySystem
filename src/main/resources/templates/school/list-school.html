@@ -45,10 +45,10 @@
                     <div class="alert alert-danger" role="alert" th:if="${messageType} == 'error'">
                         <span th:text="${message}"></span>
                     </div>
-                    <div class="alert alert-info" role="alert" th:if="${schools.size() ==0}">
+                    <div class="alert alert-info" role="alert" th:if="${school.size() ==0}">
                         <span>No schools found</span>
                     </div>
-                    <table class="table table-hover" th:if="${schools.size() > 0}">
+                    <table class="table table-hover" th:if="${school.size() > 0}">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -59,8 +59,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="school: ${schools}">
-                            <th scope="row" th:text="${school.id}"></th>
+                        <tr th:each="school: ${school}">
+                            <th scope="row" >
+                                <a href="#" th:href="@{/school/{id}(id=${school.id})}"><span th:text="${school.id}"></span></a>
+                            </th>
                             <td th:text="${school.name}"></td>
                             <td th:text="${school.city}"></td>
                             <td th:text="${school.phone}"></td>

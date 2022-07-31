@@ -1,6 +1,6 @@
 package com.sda.studysystem.services.implementations;
 
-import com.sda.studysystem.exceptions.SchoolNotFoundException;
+import com.sda.studysystem.exceptions.CourseNotFoundException;
 import com.sda.studysystem.models.Course;
 import com.sda.studysystem.repositories.CourseRepository;
 import com.sda.studysystem.services.CourseService;
@@ -19,8 +19,6 @@ import java.util.Optional;
 @Service
 @Transactional
 public class CourseServiceImpl implements CourseService {
-
-
     @Autowired
     private CourseRepository courseRepository;
     @Override
@@ -30,11 +28,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course findCourseById(Long id) throws SchoolNotFoundException {
+    public Course findCourseById(Long id) throws CourseNotFoundException {
         Optional<Course> optionalCourse = courseRepository.findById(id);
 
         if (optionalCourse.isEmpty()) {
-            throw new SchoolNotFoundException(id);
+            throw new CourseNotFoundException(id);
         }
         return optionalCourse.get();
     }
@@ -45,21 +43,21 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void updateCourse(Course course) throws SchoolNotFoundException {
+    public void updateCourse(Course course) throws CourseNotFoundException {
         if (findCourseById(course.getId()) != null){
             courseRepository.saveAndFlush(course);
         }
     }
 
     @Override
-    public void deleteCourseById(Long id) throws SchoolNotFoundException {
+    public void deleteCourseById(Long id) throws CourseNotFoundException {
         Course course = findCourseById(id);
         course.setActive(false);
         courseRepository.saveAndFlush(course);
     }
 
     @Override
-    public void restoreCourseById(Long id) throws SchoolNotFoundException {
+    public void restoreCourseById(Long id) throws CourseNotFoundException {
         Course course = findCourseById(id);
         course.setActive(true);
         courseRepository.saveAndFlush(course);

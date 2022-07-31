@@ -22,8 +22,19 @@ public class SchoolController {
     @GetMapping
     public String showSchoolListPage(Model model, @ModelAttribute("message")String message,
                                      @ModelAttribute("messageType") String messageType) {
-        model.addAttribute("schools", schoolService.findAllSchools());
+        model.addAttribute("school", schoolService.findAllSchools());
         return "school/list-school";
+    }
+
+    @GetMapping("/{id}")
+    public String showSchoolViewPage(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes ) {
+        try{
+            model.addAttribute("school", schoolService.findSchoolById(id));
+            return "school/view-school";
+        } catch (SchoolNotFoundException e) {
+            return handleSchoolNotFoundException(id, redirectAttributes);
+        }
+
     }
     @GetMapping("/create")
     public String showCreateSchoolPage(@ModelAttribute("school") School school,
@@ -60,10 +71,7 @@ public class SchoolController {
             try {
                 model.addAttribute("school", schoolService.findSchoolById(id));
             } catch (SchoolNotFoundException e) {
-                redirectAttributes.addAttribute("message",
-                        String.format("School(id=%d) not found", id));
-                redirectAttributes.addAttribute("messageType", "error");
-                return "redirect:/school";
+                return handleSchoolNotFoundException(id, redirectAttributes);
             }
         }
         return "school/update-school";
@@ -77,10 +85,7 @@ public class SchoolController {
             redirectAttributes.addAttribute("messageType", "success");
             return "redirect:/school";
         } catch (SchoolNotFoundException e) {
-            redirectAttributes.addAttribute("message",
-                    String.format("School(id=%d) not found", school.getId()));
-            redirectAttributes.addAttribute("messageType", "error");
-            return "redirect:/school";
+            return handleSchoolNotFoundException(school.getId(), redirectAttributes);
         }
     }
     @GetMapping("/delete/{id}")
@@ -92,10 +97,7 @@ public class SchoolController {
            redirectAttributes.addAttribute("messageType", "success");
            return "redirect:/school";
        } catch (SchoolNotFoundException e) {
-           redirectAttributes.addAttribute("message",
-                   String.format("School(id=%d) not found", id));
-           redirectAttributes.addAttribute("messageType", "error");
-           return "redirect:/school";
+           return handleSchoolNotFoundException(id, redirectAttributes);
        }
     }
     @GetMapping("/restore/{id}")
@@ -107,10 +109,15 @@ public class SchoolController {
             redirectAttributes.addAttribute("messageType", "success");
             return "redirect:/school";
         } catch (SchoolNotFoundException e) {
-            redirectAttributes.addAttribute("message",
-                    String.format("School(id=%d) not found", id));
-            redirectAttributes.addAttribute("messageType", "error");
-            return "redirect:/school";
+            return handleSchoolNotFoundException(id, redirectAttributes);
         }
+    }
+
+    //PRIVATE METHODS //
+    private String handleSchoolNotFoundException(Long id, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("message",
+                String.format("School(id=%d) not found", id));
+        redirectAttributes.addAttribute("messageType", "error");
+        return "redirect:/school";
     }
 }
