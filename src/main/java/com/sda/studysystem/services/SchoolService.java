@@ -4,7 +4,6 @@ import com.sda.studysystem.exceptions.SchoolNotFoundException;
 import com.sda.studysystem.models.School;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * To handle school related operations
