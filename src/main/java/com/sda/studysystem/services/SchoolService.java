@@ -4,6 +4,7 @@ import com.sda.studysystem.exceptions.SchoolNotFoundException;
 import com.sda.studysystem.models.School;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * To handle school related operations
@@ -23,7 +24,7 @@ public interface SchoolService {
      * @param id id of the school
      * @return School
      */
-    School findSchoolById(Long id) throws SchoolNotFoundException;
+    School findSchoolById(UUID id) throws SchoolNotFoundException;
 
     /**
      * To find a school by its
@@ -48,11 +49,11 @@ public interface SchoolService {
      * To delete a school by its ID
      * @param id id of the school
      */
-    void deleteSchoolById(Long id) throws SchoolNotFoundException;
+    void deleteSchoolById(UUID id) throws SchoolNotFoundException;
 
     /**
      * To restore a school by its ID
      * @param id id of the school
      */
-    void restoreSchoolById(Long id) throws SchoolNotFoundException;
+    void restoreSchoolById(UUID id) throws SchoolNotFoundException;
 }
