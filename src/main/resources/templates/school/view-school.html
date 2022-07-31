@@ -36,12 +36,12 @@
   <div class="container py-4">
     <div class="p-5 mb-4 bg-light rounded-3">
       <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">School #<span th:text="${school.id}"></span></h1>
+        <h1 class="display-5 fw-bold"><span th:text="${school.name}"></span></h1>
 
           <div class="mb-3 row">
-            <label for="name" class="col-sm-2 col-form-label">School name</label>
+            <label for="id" class="col-sm-2 col-form-label">Id</label>
             <div class="col-sm-10">
-              <input type="text" readonly class="form-control-plaintext" id="name" th:value="${school.name}">
+              <input type="text" readonly class="form-control-plaintext" id="id" th:value="${school.id}">
             </div>
           </div>
         <div class="mb-3 row">
