@@ -17,7 +17,7 @@ public interface SchoolService {
      * To create new School
      * @param school School
      */
-    void createSchool(School school);
+    void createSchool(School school) ;
 
     /**
      * To find a school by its ID

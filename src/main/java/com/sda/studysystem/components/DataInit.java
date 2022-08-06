@@ -30,12 +30,11 @@ public class DataInit {
         school.setName("Viljandi Vocational Center");
         school.setCity("Viljandi");
         school.setPhone("+372 458 7894");
-        try{
 
-            School searchSchool = schoolService.findSchoolByName(school.getName());
-            System.out.println("Cannot pre-initialize school:" + school.getName());
-        } catch (SchoolNotFoundException e) {
+        try{
             schoolService.createSchool(school);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
         }
     }
 }

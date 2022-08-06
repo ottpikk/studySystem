@@ -25,8 +25,8 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public void createSchool(School school) {
-        school.setActive(true);
-        schoolRepository.save(school);
+            school.setActive(true);
+            schoolRepository.save(school);
     }
 
     @Override
