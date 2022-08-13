@@ -1,5 +1,6 @@
 package com.sda.studysystem.services;
 
+import com.sda.studysystem.exceptions.UserNotFoundException;
 import com.sda.studysystem.models.User;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public interface UserService {
      * @param userName userName
      * @return Optional of User
      */
-    Optional<User> findUserByUserName(String userName);
+    User findUserByUserName(String userName) throws UserNotFoundException;
 
     /**
      * To find user by username and password
@@ -34,7 +35,7 @@ public interface UserService {
      * @param password password
      * @return Optional of User
      */
-    Optional<User> findUserByUserNameAndPassword(String userName, String password);
+    User findUserByUserNameAndPassword(String userName, String password) throws UserNotFoundException;
 
     /**
      * To find all users

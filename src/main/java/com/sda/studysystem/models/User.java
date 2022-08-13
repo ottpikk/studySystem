@@ -33,4 +33,6 @@ public class User extends Auditable<String> implements Serializable {
 
     @OneToOne(cascade = CascadeType.MERGE)
     private Authority authority;
+
+    private boolean isActive;
 }

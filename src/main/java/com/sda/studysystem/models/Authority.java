@@ -31,4 +31,5 @@ public class Authority extends Auditable<String> implements Serializable {
     private UUID id;
 
     private String name;
+    private boolean isActive;
 }
