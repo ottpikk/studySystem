@@ -1,5 +1,6 @@
 package com.sda.studysystem.services;
 
+import com.sda.studysystem.exceptions.AuthorityNotFoundException;
 import com.sda.studysystem.models.Authority;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface AuthorityService {
      * @param name Authority name
      * @return optional of Authority
      */
-    Optional<Authority> findAuthorityByName(String name);
+    Authority findAuthorityByName(String name) throws AuthorityNotFoundException;
 
     /**
      * To find all authorities
