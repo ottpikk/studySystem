@@ -62,11 +62,11 @@ public class DataInit {
         createAuthority(authorityAdmin);
 
         Authority authorityTeacher = new Authority();
-        authorityAdmin.setName(AUTHORITY_TEACHER);
+        authorityTeacher.setName(AUTHORITY_TEACHER);
         createAuthority(authorityTeacher);
 
         Authority authorityStudent = new Authority();
-        authorityAdmin.setName(AUTHORITY_STUDENT);
+        authorityStudent.setName(AUTHORITY_STUDENT);
         createAuthority(authorityStudent);
     }
 

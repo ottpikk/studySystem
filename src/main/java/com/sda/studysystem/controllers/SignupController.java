@@ -29,7 +29,8 @@ public class SignupController {
     private AuthorityService authorityService;
 
     @GetMapping
-    public String showSignupPage(@ModelAttribute("user") User user, @ModelAttribute("message") String message,
+    public String showSignupPage(@ModelAttribute("user") User user,
+                                 @ModelAttribute("message") String message,
                                  @ModelAttribute("messageType") String messageType, Model model) {
         model.addAttribute("authorities", authorityService.findAllAuthorities());
         return "auth/signup";

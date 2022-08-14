@@ -22,6 +22,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -34,21 +35,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByUserName(String userName) throws UserNotFoundException {
-        Optional<User> optionalUser = userRepository.findByUsername(userName);
+        Optional<User> optionalUser = userRepository.findByUserName(userName);
 
         if(optionalUser.isEmpty()) {
             throw new UserNotFoundException(userName);
         }
+
         return optionalUser.get();
     }
 
     @Override
     public User findUserByUserNameAndPassword(String userName, String password) throws UserNotFoundException {
-        Optional<User> optionalUser = userRepository.findByUsernameAndPassword(userName, password);
+        Optional<User> optionalUser = userRepository.findByUserNameAndPassword(userName, password);
 
         if(optionalUser.isEmpty()) {
             throw new UserNotFoundException(userName, password);
         }
+
         return optionalUser.get();
     }
 

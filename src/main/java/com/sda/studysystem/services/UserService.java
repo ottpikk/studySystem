@@ -24,16 +24,17 @@ public interface UserService {
      * To find user by userName
      *
      * @param userName userName
-     * @return Optional of User
+     * @return User
      */
     User findUserByUserName(String userName) throws UserNotFoundException;
+
 
     /**
      * To find user by username and password
      *
      * @param userName userName
      * @param password password
-     * @return Optional of User
+     * @return User
      */
     User findUserByUserNameAndPassword(String userName, String password) throws UserNotFoundException;
 
@@ -43,5 +44,4 @@ public interface UserService {
      * @return list of users
      */
     List<User> findAllUsers();
-
 }
